@@ -1,3 +1,14 @@
+import numpy as np
+
+def solve_linear_system(A, B):
+	A = np.array(A)
+	B = np.array(B)
+	try:
+		solution = np.linalg.solve(A, B)
+		return solution
+	except np.linalg.LinAlgError:
+		return None, None, None
+
 def approximate(f, x_arr):
 	sx, sxx, sx3, sx4, sy, sxy, n, sxxy = 0, 0, 0, 0, 0, 0, 0, 0
 	print(f'|\t№\t|\tx\t\t|\ty\t\t|')
@@ -10,12 +21,19 @@ def approximate(f, x_arr):
 		sy += y
 		sx3 += x ** 3
 		sx4 += x ** 4
-		sxxy += x ** 2 * y
+		sxxy += y * x ** 2
 		print(f'|\t{n}\t|\t{x:.3f}\t|\t{y:.3f}\t|')
-	d = n * sx * sx4 + 2 * sx * sx3 * sxx - sxx ** 3 - n * sx3 ** 2 - sx4 * sx ** 2
-	if d == 0:
+
+	A = np.array([
+		[n, sx, sxx],
+		[sx, sxx, sx3],
+		[sxx, sx3, sx4]
+	])
+
+	B = np.array([sy, sxy, sxxy])
+
+	try:
+		a0, a1, a2 = solve_linear_system(A, B)
+		return float(a0), float(a1), float(a2)
+	except np.linalg.LinAlgError:
 		return None
-	a0 = (sy * sxx * sx3 + sx * sx3 * sxxy + sxy * sx3 * sxx - sxxy * sxx ** 2 - sy * sx3 ** 2 - sxy * sx * sx4) / d
-	a1 = (n * sxy * sx4 + sx * sxx * sxxy + sxx * sy * sx3 - sxx ** 2 * sxy - sxxy * sx3 * n - sx * sy * sx4) / d
-	a2 = (n * sxx * sxxy + sx * sx3 * sy + sx * sxx * sxy - sxx ** 2 * sy - n * sx3 * sxy - sx ** 2 * sxxy) / d
-	return a0, a1, a2
