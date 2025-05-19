@@ -1,12 +1,15 @@
+import math
+
 import approximators.linear
 import approximators.quadratic
+import approximators.exponential
 import graph
 
 f = lambda x: 17 * x / (x ** 4 + 16)
 
 h = 0.4
 x_start = -4
-x_finish = 0
+x_finish = 4
 x = x_start
 x_arr = []
 while x <= x_finish:
@@ -22,5 +25,9 @@ print('Квадратичная аппроксимация:')
 quadratic_coef = approximators.quadratic.approximate(f, x_arr)
 print(quadratic_coef)
 graph.add_function(lambda x: quadratic_coef[0] + quadratic_coef[1] * x + quadratic_coef[2] * x**2, [x_arr[0] - 1, x_arr[-1] + 1], label='Квадратичная')
-
+print('Экспоненциальная аппроксимация:')
+exponential_coef = approximators.exponential.approximate(f, x_arr)
+if exponential_coef is not None:
+	print(exponential_coef)
+	graph.add_function(lambda x: exponential_coef[0] * math.exp(exponential_coef[1] * x), [x_arr[0] - 1, x_arr[-1] + 1], label='Экспоненциальная')
 graph.show()
