@@ -1,10 +1,7 @@
-def approximate(f, x_start, x_finish, h):
-	x = x_start
-	if x_start > x_finish or h < 0:
-		return None
+def approximate(f, x_arr):
 	sx, sxx, sx3, sx4, sy, sxy, n, sxxy = 0, 0, 0, 0, 0, 0, 0, 0
 	print(f'|\t№\t|\tx\t\t|\ty\t\t|')
-	while x < x_finish:
+	for x in x_arr:
 		y = f(x)
 		n += 1
 		sx += x
@@ -15,7 +12,6 @@ def approximate(f, x_start, x_finish, h):
 		sx4 += x ** 4
 		sxxy += x ** 2 * y
 		print(f'|\t{n}\t|\t{x:.3f}\t|\t{y:.3f}\t|')
-		x += h
 	d = n * sx * sx4 + 2 * sx * sx3 * sxx - sxx ** 3 - n * sx3 ** 2 - sx4 * sx ** 2
 	if d == 0:
 		return None
