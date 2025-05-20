@@ -26,4 +26,5 @@ def correlation(f, x_arr):
 		s_upper += (x - mid_x) * (f(x) - mid_y)
 		sx_lower += (x - mid_x) ** 2
 		sy_lower += (f(x) - mid_y) ** 2
+	if sx_lower * sy_lower == 0: return float('inf')
 	return s_upper / (sx_lower * sy_lower) ** 0.5

@@ -1,4 +1,5 @@
 import math
+import sys
 import warnings
 
 import util.mid_quad_deviation
@@ -12,22 +13,41 @@ import approximators.exponential
 import approximators.logarithmic
 import approximators.power
 import approximators.cubic
+import util.input_handler
 import graph
 
-f = lambda x: 17 * x / (x ** 4 + 16)
+import argparse
 
-h = 0.4
-x_start = 0
-x_finish = 4
-x = x_start
+parser = argparse.ArgumentParser()
+parser.add_argument('--filename', '-f')
+
+args = parser.parse_args()
+
+if args.filename is not None:
+	util.input_handler.setfile(args.filename)
+
+n = None
+try:
+	n = int(util.input_handler.read("Введите количество элементов(от 9 до 12): "))
+	if n < 9 or n > 12:
+		raise ValueError
+except ValueError:
+	print('Введите число от 9 до 12')
+	sys.exit(-1)
 x_arr = []
 y_arr = []
-while x <= x_finish:
-	x_arr.append(x)
-	y_arr.append(f(x))
-	x += h
+print(f'Введите {n} элементов в формате `x y`')
+for i in range(n):
+	try:
+		x, y = map(int, util.input_handler.read().split())
+		x_arr.append(x)
+		y_arr.append(y)
+	except:
+		print('Неправильный ввод!')
+		sys.exit(-1)
+print('Спасибо!')
 graph.create_plot()
-graph.add_points(f, x_arr)
+graph.add_points(x_arr, y_arr, label='Исходные точки')
 ###################################
 print('Линейная аппроксимация:')
 linear_coef = approximators.linear.approximate(x_arr, y_arr)

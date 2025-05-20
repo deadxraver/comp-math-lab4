@@ -28,9 +28,9 @@ def add_function(func, interval, label=None, color=None, is_best=False):
 			 zorder=1)
 
 
-def add_points(func, points, label=None, color='red', marker_size=100):
-	x_points = np.array(points)
-	y_points = np.vectorize(func)(x_points)
+def add_points(x_arr, y_arr, label=None, color='red', marker_size=100):
+	x_points = np.array(x_arr)
+	y_points = np.array(y_arr)
 
 	plt.scatter(x_points, y_points,
 				color=color,
