@@ -2,6 +2,7 @@ import math
 
 import approximators.linear
 
+
 def approximate(x_arr, y_arr):
 	new_y_arr = []
 	new_x_arr = []

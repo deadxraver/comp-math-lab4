@@ -1,13 +1,6 @@
 import numpy as np
+import util.system_solver
 
-def solve_linear_system(A, B):
-	A = np.array(A)
-	B = np.array(B)
-	try:
-		solution = np.linalg.solve(A, B)
-		return solution
-	except np.linalg.LinAlgError:
-		return None, None, None
 
 def approximate(x_arr, y_arr):
 	sx, sxx, sx3, sx4, sy, sxy, n, sxxy = 0, 0, 0, 0, 0, 0, 0, 0
@@ -34,7 +27,7 @@ def approximate(x_arr, y_arr):
 	B = np.array([sy, sxy, sxxy])
 
 	try:
-		a0, a1, a2 = solve_linear_system(A, B)
+		a0, a1, a2 = util.system_solver.solve_linear_system(A, B)
 		return float(a0), float(a1), float(a2)
 	except np.linalg.LinAlgError:
 		return None
