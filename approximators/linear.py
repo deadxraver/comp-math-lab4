@@ -15,3 +15,15 @@ def approximate(x_arr, y_arr):
 	else:
 		print('Cannot use this method')
 		return None, None
+
+
+def correlation(f, x_arr):
+	s_upper = 0
+	sx_lower, sy_lower = 0, 0
+	mid_x, mid_y = sum(x_arr) / len(x_arr), sum([f(x) for x in x_arr]) / len(x_arr)
+	for i in range(len(x_arr)):
+		x = x_arr[i]
+		s_upper += (x - mid_x) * (f(x) - mid_y)
+		sx_lower += (x - mid_x) ** 2
+		sy_lower += (f(x) - mid_y) ** 2
+	return s_upper / (sx_lower * sy_lower) ** 0.5

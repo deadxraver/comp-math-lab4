@@ -33,6 +33,7 @@ print('Линейная аппроксимация:')
 linear_coef = approximators.linear.approximate(x_arr, y_arr)
 print(linear_coef)
 linear_f = lambda x: linear_coef[0] * x + linear_coef[1]
+print(f'Коэффициент корреляции: {approximators.linear.correlation(linear_f, x_arr)}')
 ###################################
 print('Квадратичная аппроксимация:')
 quadratic_coef = approximators.quadratic.approximate(x_arr, y_arr)
