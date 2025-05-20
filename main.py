@@ -28,8 +28,8 @@ if args.filename is not None:
 
 n = None
 try:
-	n = int(util.input_handler.read("Введите количество элементов(от 9 до 12): "))
-	if n < 9 or n > 12:
+	n = int(util.input_handler.read("Введите количество элементов(от 8 до 12): "))
+	if n < 8 or n > 12:
 		raise ValueError
 except ValueError:
 	print('Введите число от 9 до 12')
