@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+best_approx = None
 
 def create_plot(figsize=(10, 6)):
 	plt.figure(figsize=figsize)
@@ -9,7 +10,13 @@ def create_plot(figsize=(10, 6)):
 	plt.grid(True, alpha=0.3)
 
 
-def add_function(func, interval, label=None, color=None, linestyle='--'):
+def add_function(func, interval, label=None, color=None, is_best=False):
+	if func is None:
+		return
+	linestyle = '-' if is_best else '--'
+	if is_best:
+		global best_approx
+		best_approx = label
 	a, b = interval
 	x = np.linspace(a, b, 500)
 	y = np.vectorize(func)(x)
@@ -34,6 +41,6 @@ def add_points(func, points, label=None, color='red', marker_size=100):
 
 
 def show():
-	plt.title('Графики функций')
+	plt.title('Графики приближений')
 	plt.legend()
 	plt.show()

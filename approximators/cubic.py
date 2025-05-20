@@ -7,6 +7,7 @@ def approximate(x_arr, y_arr) -> (float, float, float, float):
 	n = 0
 	print(f'|\t№\t|\tx\t\t|\ty\t\t|')
 	for i in range(len(x_arr)):
+		n += 1
 		x = x_arr[i]
 		y = y_arr[i]
 		sx += x
