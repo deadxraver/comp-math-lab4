@@ -8,12 +8,13 @@ import approximators.linear
 import approximators.quadratic
 import approximators.exponential
 import approximators.logarithmic
+import approximators.power
 import graph
 
 f = lambda x: 17 * x / (x ** 4 + 16)
 
 h = 0.4
-x_start = -4
+x_start = 0
 x_finish = 4
 x = x_start
 x_arr = []
@@ -49,4 +50,10 @@ if logarithmic_coef is not None:
 					   label='Логарифмическая')
 else:
 	print('Нельзя применить логарифмическую аппроксимацию')
+print('Степенная аппроксимация:')
+power_coef = approximators.power.approximate(x_arr, y_arr)
+if power_coef is not None:
+	print(power_coef)
+	graph.add_function(lambda x: logarithmic_coef[0] * np.pow(x, logarithmic_coef[1]), [x_arr[0] - 1, x_arr[-1] + 1],
+					   label='Степенная')
 graph.show()
