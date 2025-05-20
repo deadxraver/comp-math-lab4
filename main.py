@@ -39,7 +39,7 @@ y_arr = []
 print(f'Введите {n} элементов в формате `x y`')
 for i in range(n):
 	try:
-		x, y = map(int, util.input_handler.read().split())
+		x, y = map(float, util.input_handler.read().split())
 		x_arr.append(x)
 		y_arr.append(y)
 	except:
