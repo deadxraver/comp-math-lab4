@@ -9,11 +9,12 @@ def solve_linear_system(A, B):
 	except np.linalg.LinAlgError:
 		return None, None, None
 
-def approximate(f, x_arr):
+def approximate(x_arr, y_arr):
 	sx, sxx, sx3, sx4, sy, sxy, n, sxxy = 0, 0, 0, 0, 0, 0, 0, 0
 	print(f'|\t№\t|\tx\t\t|\ty\t\t|')
-	for x in x_arr:
-		y = f(x)
+	for i in range(len(x_arr)):
+		x = x_arr[i]
+		y = y_arr[i]
 		n += 1
 		sx += x
 		sxx += x ** 2
